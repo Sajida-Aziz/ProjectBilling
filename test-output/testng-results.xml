@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="12" passed="12" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-01-04T17:22:03 GST" name="Default suite" finished-at="2023-01-04T17:24:03 GST" duration-ms="120400">
+    <groups>
+    </groups>
+    <test started-at="2023-01-04T17:22:03 GST" name="Default test" finished-at="2023-01-04T17:24:03 GST" duration-ms="120400">
+      <class name="TestNGtest.TC_Purchase">
+        <test-method is-config="true" signature="beforeTest()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:03 GST" name="beforeTest" finished-at="2023-01-04T17:22:15 GST" duration-ms="11645" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method signature="TC_AverifyTitle()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:15 GST" name="TC_AverifyTitle" finished-at="2023-01-04T17:22:20 GST" duration-ms="5360" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_AverifyTitle -->
+        <test-method signature="TC_Baddingwithoutsuplier()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:20 GST" name="TC_Baddingwithoutsuplier" finished-at="2023-01-04T17:22:33 GST" duration-ms="12435" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_Baddingwithoutsuplier -->
+        <test-method signature="TC_Caddingwithoutstatus()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:33 GST" name="TC_Caddingwithoutstatus" finished-at="2023-01-04T17:22:52 GST" duration-ms="19405" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_Caddingwithoutstatus -->
+        <test-method signature="TC_DaddingwithoutbusinessLoc()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:52 GST" name="TC_DaddingwithoutbusinessLoc" finished-at="2023-01-04T17:23:05 GST" duration-ms="13403" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_DaddingwithoutbusinessLoc -->
+        <test-method signature="TC_EaddingwithoutProduct()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:05 GST" name="TC_EaddingwithoutProduct" finished-at="2023-01-04T17:23:12 GST" duration-ms="6796" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_EaddingwithoutProduct -->
+        <test-method signature="TC_Faddingwithoutamount()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:12 GST" name="TC_Faddingwithoutamount" finished-at="2023-01-04T17:23:26 GST" duration-ms="13508" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_Faddingwithoutamount -->
+        <test-method signature="TC_GCardDetails()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:26 GST" name="TC_GCardDetails" finished-at="2023-01-04T17:23:28 GST" duration-ms="2257" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_GCardDetails -->
+        <test-method signature="TC_HdateCheck()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:28 GST" name="TC_HdateCheck" finished-at="2023-01-04T17:23:28 GST" duration-ms="35" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_HdateCheck -->
+        <test-method signature="TC_Isearchproduct()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:28 GST" name="TC_Isearchproduct" finished-at="2023-01-04T17:23:34 GST" duration-ms="6285" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_Isearchproduct -->
+        <test-method signature="TC_JfileUpload()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:34 GST" name="TC_JfileUpload" finished-at="2023-01-04T17:23:36 GST" duration-ms="2123" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_JfileUpload -->
+        <test-method signature="TC_Kaddproduct()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:36 GST" name="TC_Kaddproduct" finished-at="2023-01-04T17:23:40 GST" duration-ms="3217" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_Kaddproduct -->
+        <test-method signature="TC_ZvalidData()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:40 GST" name="TC_ZvalidData" finished-at="2023-01-04T17:24:03 GST" duration-ms="23446" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_ZvalidData -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:24:03 GST" name="afterTest" finished-at="2023-01-04T17:24:03 GST" duration-ms="253" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- TestNGtest.TC_Purchase -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
