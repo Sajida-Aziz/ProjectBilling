@@ -1,0 +1,102 @@
+Selenium Web Automation
+Install chromeDriver
+Steps:check your system browser version...open browser ..settings...help...abour google chrome..ull get the version
+ 2.open www.selenium.dev.....expand browsers.... chrome brower... check version that matcher ur browser..download
+ 3.pasete in desired location and extract... open chrowmedriver.exe file and check if browser is up.
+ 
+ In eclipse create a  simple new project
+ 
+ MVN repository.com..... search for selenium java dependency... version 4.4.0 preferale
+ copy dependency and add to pom.xml.. save.
+ 
+ create a new package and then a class.. under src/test/java..
+ 
+ package seleniumEve;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Program1 {
+
+	public static void main(String[] args) {
+		{
+			
+			WebDriver driver;
+			
+			System.setProperty("webdriver.chrome.driver", "e:\\libraries\\chromedriver_win32\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver","C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+			driver=new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.get("https://selenium.obsqurazone.com/index.php");
+			
+			 String titleexpected="Obsqura Testing";
+			  String titleactual=driver.getTitle();
+			  if(titleexpected.equals(titleactual))
+			  {
+				  System.out.println("pass");
+			  }
+				  else
+				  {
+					  System.out.println("Fail");
+				  }
+			  
+			  driver.close();
+			  }
+		}
+
+
+The above code allows to up the broser and tests if the actual title and expected title of the browser match..
+
+Session 2
+Installing testNG and writing test in testNG
+Eclipse.... Help...Eclipse Market Place....serach for testNg.....install testNG...
+trust error may come... check always trust....n restart eclipse...
+
+Go to src/test/java...... create a package... testng examples....rightclick package... testNG..creae testNG test
+
+tick on before and after test check box...
+
+public class NewTest {
+	WebDriver driver;
+  @Test
+  public void f() {
+	  String titleexpected="Obsqur Testing";
+	  String titleactual=driver.getTitle();
+	  if(titleexpected.equals(titleactual))
+	  {
+		  System.out.println("pass the test");
+	  }
+		  else
+		  {
+			  System.out.println("Fail");
+		  }
+	
+  }
+  @BeforeTest
+  public void beforeTest() throws InterruptedException {
+	  
+		
+		System.setProperty("webdriver.chrome.driver", "e:\\libraries\\chromedriver_win32\\chromedriver.exe");
+		
+		
+		driver=new ChromeDriver();
+		Thread.sleep(3000);
+		driver.manage().window().maximize();
+		Thread.sleep(3000);
+		driver.get("https://selenium.obsqurazone.com/index.php");
+		Thread.sleep(3000);
+
+	 
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  driver.close();
+  }
+
+}
+
+
+No need to write main method..... execution will strat from @before test... then @test then @after test 
+ 
+ 

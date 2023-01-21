@@ -1,78 +1,70 @@
 package TestNGtest;
 
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import PageElements.LoginPage;
 import Utilities.ExcelRead;
+import Utilities.GeneralUtilities;
 import Utilities.LaunchBrowser;
 import Utilities.ScreenShotCapture;
 import Utilities.WaitConditions;
 import Utilities.readConfig;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-
-import java.io.IOException;
-import java.time.Duration;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-
-public class TC_loginpage {
-	
+public class TC_loginpage extends LaunchBrowser {
 	WebDriver driver;
-	LaunchBrowser obj=new LaunchBrowser();
 	readConfig readconfig =new readConfig();
 	LoginPage loginpage;
-	
-	  @Test(enabled=true)
+	GeneralUtilities objutil=new GeneralUtilities();
+	WaitConditions objwait=new WaitConditions();
+	  @Severity(SeverityLevel.BLOCKER)
+	  @Description("Verify page title")
+	  @Story("Test verify page title")
+	  @Test(enabled=true,priority=1,groups= {"smoke"})
 	  public void TC_AVerifyTitle() {
-		  String title=driver.getTitle();
-		  if(title.equals("Login - Demo POS"))
-			  Assert.assertTrue(true);	  
+		  String title=objutil.getPageTitle(driver);
+		  Assert.assertEquals(title, "Login - Demo POS","Login page title does not match");
 		  	  }
 	  
-	  
-  @Test(enabled=true)
-  public void TC_Clogin() throws IOException {
-		LoginPage loginpage=new LoginPage(driver);
-		loginpage.EnterUserName(readconfig.getUserName());
-		loginpage.Enterpwd(readconfig.getPwd());
+	  @Severity(SeverityLevel.NORMAL)
+	  @Description("Verify login In functionality")
+	  @Story("Test verify valid login")
+      @Test(enabled=true,priority=5,groups= {"smoke"})
+  public void TC_CVerifyloginwithValidData() throws IOException {
+		  loginpage=new LoginPage(driver);
+		 loginpage.EnterUserName(readconfig.getUserName());
+		 loginpage.Enterpwd(readconfig.getPwd());
 		String titleExpected=loginpage.buttonClick();
 		ScreenShotCapture objscreenshot=new ScreenShotCapture(driver);
 		objscreenshot.screenshots();
-		if(titleExpected.equals("Home - Lloll"))
-				Assert.assertTrue(true);
-		else
-			System.out.println("test failed");
+		Assert.assertEquals(titleExpected,"Home - Lloll","Title does not match");
 		loginpage.endTour.click();
-		//driver.findElement(By.xpath("//span[text()='Aju Mathew']")).click();
-		//driver.findElement(By.xpath("(//a[contains(@class,'btn btn-default')])[2]")).click();
-}
-  
-  
-  @Test(dataProvider="loginData",enabled=true) 
-  public void TC_BloginDDwithInvalidData(String uname, String pwd) throws Throwable
-  {
+	}
+	  
+	  @Severity(SeverityLevel.BLOCKER)
+	  @Description("verify login In functionality")
+	  @Story("Test verify invalid login")
+  @Test(dataProvider="loginData",enabled=true,priority=3) 
+  public void TC_BVerifyloginDDwithInvalidData(String uname, String pwd) throws Throwable{
 	  LoginPage loginpage=new LoginPage(driver);
 		loginpage.EnterUserName(uname);
 		loginpage.Enterpwd(pwd);
 		loginpage.buttonClick();
-		String titleExpected=loginpage.buttonClick();
-		String invalidmsg= driver.findElement(By.tagName("strong")).getText();
-		System.out.println(invalidmsg);
-		if(invalidmsg.contains("These credentials do not match our records."))
-			Assert.assertTrue(true);
-		else
-			Assert.assertTrue(false, "TestFailed");
-		loginpage.UserName.clear();
-		loginpage.pwd.clear();
-		Thread.sleep(2000);
+		String actual=objutil.getElementText(loginpage.invalidmsg);
+		Assert.assertEquals(actual,"These credentials do not match our records.","Verify login with invalid data failed" );
+	    objutil.clearText(loginpage.UserName);
+		objutil.clearText(loginpage.pwd);
+		objutil.mediumDelay(2000);
 		  }
   
   @DataProvider(name="loginData")
@@ -87,39 +79,24 @@ public class TC_loginpage {
 	logindata[i-1][j]=excelread.ReadData(i, j);
 	}
 	 }
-	 
-	 return logindata;	  
+	 	 return logindata;	  
   }
   
-  @Test
-  public void itestresultdemo()
-  {
-	if(loginpage.UserName.isDisplayed())
-	{
-		Assert.assertFalse(true);
-	}
+  @Test(priority=4)
+  public void VerifyHomePageTitle()
+  {   
+	  String actual=objutil.getPageTitle(driver);
+	  Assert.assertEquals(actual,"Home - Lloll","TestCase failed as driver did not to land homepage");
   }
-  
-  @AfterMethod
-  public void validateTestCases(ITestResult result) throws IOException
-  {
-	  if (result.getStatus()==ITestResult.FAILURE)
-	  {
-		  ScreenShotCapture objscreenshot=new ScreenShotCapture(driver);
-			objscreenshot.screenshots();
-	  }
-  }
-  
-   
-  @BeforeTest()
+   @BeforeTest()
   public void beforeTest() {
-	  obj.launchBrowser(readconfig.getUrl(),readconfig.getBrowser());
-	  this.driver=obj.driver;
-	  loginpage=new LoginPage(driver);
+	   launchBrowser(readconfig.getUrl(),readconfig.getBrowser());
+	   this.driver=super.driver;
+	   objwait.implicitwait(driver);
+	      }
+   
+   @AfterTest
+	  public void afterTest() {
+	   closeBrowser(driver);
 	  }
-
-  @AfterTest
-  public void afterTest() {
-	  driver.close();
-  }
 }

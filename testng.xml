@@ -5,7 +5,7 @@
     <classes>
       <class name="TestNGtest.TC_loginpage"/>
       <class name="TestNGtest.TC_Purchase"/>
-      <class name="TestNGtest.TC_ListProduct"/>
+     <class name="TestNGtest.TC_ListProduct"/>
       <class name="TestNGtest.TC_ProductPage"/>
     </classes>
   </test> <!-- Test -->

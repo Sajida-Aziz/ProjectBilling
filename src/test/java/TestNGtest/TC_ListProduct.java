@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 
 import PageElements.ListProduct;
 import PageElements.LoginPage;
+import PageElements.ProductPage;
+import Utilities.GeneralUtilities;
 import Utilities.LaunchBrowser;
 import Utilities.WaitConditions;
 import Utilities.readConfig;
@@ -14,85 +16,80 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
-public class TC_ListProduct extends LaunchBrowser{
+public class TC_ListProduct extends LaunchBrowser {
 	WebDriver driver;
-	LaunchBrowser obj=new LaunchBrowser();
+	
 	readConfig readconfig =new readConfig();
 	ListProduct listproduct;
-	WaitConditions objwait=new WaitConditions();	
-	 @Test(enabled=true)
-	  public void TC_AVerifyTitle() throws InterruptedException {
-		  String title=driver.getTitle();
-				  if(title.equalsIgnoreCase("Products - Lloll"))
-		  {
-			  Assert.assertTrue(false);
-		  }
-		  }
+	WaitConditions objwait=new WaitConditions();
+	ProductPage objpro;
+	GeneralUtilities objutil=new GeneralUtilities();
+  @Test(priority=1,groups= {"smoke"})
+  public void TC_AVerifyTitle() throws InterruptedException {
+	  LoginPage objlogin=new LoginPage(driver);
+	  objpro=new ProductPage(driver);
+	  objlogin.EnterUserName(readconfig.getUserName());
+	  objlogin.Enterpwd(readconfig.getPwd());
+	  objlogin.buttonClick();
+	  objlogin.endTour.click();
+	  objpro.productclick.click();
+	  listproduct=new ListProduct(this.driver);
+	  listproduct.ListProductPage.click();	
+	  String title=objutil.getPageTitle(driver);
+	  Assert.assertEquals(title, "Products - Lloll", "Failed because page title does not match");
+	  }
 
-	
-  @Test(enabled=true,groups= {" group1"},priority=1)
-  public void TC_A() throws InterruptedException {
-	  objwait.waitForElementTobeVisible(driver,listproduct.searchField,Duration.ofSeconds(20));
-	  String tabledata=listproduct.searchPro("almonds");
-	  if(tabledata.contains("almonds"))
-	  {
-		  Assert.assertTrue(true);
-	  }
-	  }
-  
-  @Test(enabled=true)
-  public void TC_Bcheckbox() throws InterruptedException {
+
+@Test(priority=2,enabled=true,groups= {" smoke"})
+public void TC_AverifySearch() throws InterruptedException {
+  objwait.waitForElementTobeVisible(driver,listproduct.searchField,Duration.ofSeconds(5));
+  String tabledata=listproduct.searchPro("almonds");
+  if(tabledata.contains("almonds"))
+  Assert.assertTrue(true);
+  }
+@Test(priority=3,enabled=true)
+public void TC_Bverifycheckbox() throws InterruptedException {
 	  boolean msg=listproduct.checkboxselected();
 	  Assert.assertEquals(msg, true);
 	  }
-  
-  @Test(enabled=true)//delete and delete without element should work together as after deleting goes to another page
-  public void TC_Cdelete() throws InterruptedException {
+
+@Test(priority=4,enabled=true)//delete and delete without element should work together as after deleting goes to another page
+public void TC_Cverifydeletefunctio() throws InterruptedException {
+	
 	  String deltemsg=listproduct.deleteMethod();
-	  
-	  if(deltemsg.contains("Deleted Successfully"))
-	  {
-		  Assert.assertTrue(true);
+	  Assert.assertEquals(deltemsg, "Deleted Successfully", "Delete not successful");
+     objutil.mediumDelay(2000);
 	  }
-	   // driver.navigate().back();
-	  objwait.waitSleep(2000);
-	  }
-  
-  @Test(enabled=true)
-  public void TC_DdeleteWithNoElement() throws InterruptedException {
-	  driver.navigate().back();
-	  objwait.waitSleep(2000);
-	 driver.navigate().refresh();
-	  listproduct.searchField.clear();
-	  listproduct.searchField.sendKeys("gujitzu");
-	  objwait.waitSleep(2000);
-	  String msg=listproduct.NoRecord();
-	  if (msg.contains("no record "))
-	  {
-		  Assert.assertTrue(true);
-	  }
+
+@Test(priority=5,enabled=true)
+public void TC_DverifydeleteWithNoElement() throws InterruptedException {
+	objutil.navBackpage(driver);  
+	objwait.waitForElementTobeVisible(driver, listproduct.searchField,Duration.ofSeconds(40) );
+    listproduct.searchField.clear();
+	objutil.sendText(listproduct.searchField,"gujitzu");
+	objwait.fluentWait(driver, listproduct.NoRecords);
+	String msg=listproduct.NoRecord();
+	  Assert.assertEquals(msg, "No matching records found", "Failed to execute with no element");
 	 }
 
-  @BeforeTest(groups= {" group1"})
+  @BeforeTest
   public void beforeTest() {
-	  obj.launchBrowser(readconfig.getUrl(),readconfig.getBrowser());
-	  this.driver=obj.driver;
-	   LoginPage objlogin=new LoginPage(driver);
-	   objlogin.EnterUserName(readconfig.getUserName());
-		objlogin.Enterpwd(readconfig.getPwd());
-		objlogin.buttonClick();
-		driver.findElement(By.cssSelector("button.btn-default:nth-child(3)")).click();
-		driver.findElement(By.xpath("//span[text()='Products']")).click();//product click
-		listproduct=new ListProduct(this.driver);
-		listproduct.ListProductPage.click();
+	  launchBrowser(readconfig.getUrl(),readconfig.getBrowser());
+	  this.driver=super.driver;
+	   objwait.implicitwait(driver);
 	}
-
-  @AfterTest(groups= {" group1"})
-  public void afterTest() {
-	  driver.quit();
-  }
+  
+  @AfterTest
+	 public void afterTest() {
+		
+	  closeBrowser(driver);
+	 }
+	
+  
 
 }

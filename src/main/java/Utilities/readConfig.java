@@ -13,7 +13,10 @@ Properties pro;
 	
 	public readConfig() 
 	{
-		File src=new File("C:\\Users\\Sajida\\eclipse-workspace\\ProjectBilling\\src\\main\\resources\\config.properties");
+		
+		String path1 = System.getProperty("user.dir");
+		//File src=new File("C:\\Users\\Sajida\\eclipse-workspace\\ProjectBilling\\src\\main\\resources\\config.properties");
+		File src=new File(path1+"\\src\\main\\resources\\config.properties");
 		FileInputStream fis;
 		try {
 			fis = new FileInputStream(src);

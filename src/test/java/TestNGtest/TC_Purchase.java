@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import PageElements.LoginPage;
 import PageElements.PurchasePage;
+import Utilities.GeneralUtilities;
 import Utilities.LaunchBrowser;
 import Utilities.WaitConditions;
 import Utilities.readConfig;
@@ -11,6 +12,7 @@ import Utilities.readConfig;
 import org.testng.annotations.BeforeTest;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -20,114 +22,88 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
-public class TC_Purchase {
+public class TC_Purchase extends LaunchBrowser{
 	WebDriver driver;
-	LaunchBrowser obj=new LaunchBrowser();
 	readConfig readconfig =new readConfig();
 	PurchasePage purchasepage;
 	WaitConditions objwait=new WaitConditions();
-  @Test()
+	GeneralUtilities objutil=new GeneralUtilities();
+  @Test(priority=1,groups= {"smoke"})
   public void TC_AverifyTitle() throws InterruptedException {
-	  
+	 LoginPage objlogin=new LoginPage(driver);
+	 objlogin.EnterUserName(readconfig.getUserName());
+	 objlogin.Enterpwd(readconfig.getPwd());
+	 objlogin.buttonClick();
+	 objlogin.endTour.click();
+	 purchasepage=new PurchasePage(this.driver); 
 	 String title= purchasepage.AddpurchasePage();
-	 System.out.println(title);
-	 if(title.equalsIgnoreCase("Add Purchase - Lloll"))
-			 
-		Assert.assertTrue(true); 
-	 
-	   }
+	 Assert.assertEquals(title,"Add Purchase - Lloll","Verify purchasepage failed ");
+	    }
   
-  @Test(enabled=true)
-  public void TC_Baddingwithoutsuplier() throws InterruptedException {
-	  
-	  
-	 
+  @Test(priority=2,enabled=true)
+  public void TC_BVerifyaddingwithoutsuplier() throws InterruptedException {
+	  objwait.waitForElementTobeVisible(driver,purchasepage.PurchaseSearch,Duration.ofSeconds(30));
 	  purchasepage.addPurSearch("shampoo");
+	 // objwait.waitForElementTobeVisible(driver, purchasepage.PInvalidSupp,Duration.ofSeconds(6));
+	  //objwait.waitForElementTobePresent(driver, By.id("supplier_id-error"),Duration.ofSeconds(40));
 	  objwait.waitSleep(2000);
+	  objwait.waitForElementTobeVisible(driver, purchasepage.PurchaseSave,Duration.ofSeconds(20));
 	  purchasepage.PurchaseSave.click();
-	 objwait.waitSleep(6000);
+	  objwait.waitForElementTobeVisible(driver, purchasepage.PInvalidSupp,Duration.ofSeconds(4));
 	 String msg=purchasepage.PInvalidSupp.getText();
-	  if(msg.contains("This field is required"))
-	  {
-		  Assert.assertTrue(true);
-	  }
-	   }
+	 Assert.assertEquals(msg, "This field is required.","Failed to execute withour supplier");
+   }
   
-  @Test(enabled=true)
-  public void TC_Caddingwithoutstatus() throws InterruptedException {
-	  driver.navigate().refresh();
-	  objwait.waitSleep(5000);
+  @Test(priority=3,enabled=true)
+  public void TC_CVerifyaddingwithoutstatus() throws InterruptedException {
+	  objutil.refresthpage(driver);
 	  purchasepage.addPurSearch("shampoo");
 	  objwait.waitSleep(5000);
-	  //purchasepage.addAmount("1890");
 	  purchasepage.PurchaseSave.click();
-	  objwait.waitSleep(5000);
+	  objwait.waitForElementTobeVisible(driver, purchasepage.PInvalidStatus,Duration.ofSeconds(4));
 	  String msg=purchasepage.PInvalidStatus.getText();
-	  System.out.println(msg);
-	  if(msg.contains("This field is required"))
-	  {
-		  Assert.assertTrue(true);
-	  }
-	  
-	  
-	
-	   }
-@Test(enabled=true)
-  public void TC_DaddingwithoutbusinessLoc() throws InterruptedException {
-	 driver.navigate().refresh();
-	  Thread.sleep(5000);
+	  Assert.assertEquals(msg, "This field is required.","Failed to execute withour status");
+	}
+@Test(priority=4,enabled=true)
+  public void TC_DVerifyaddingwithoutbusinessLoc() throws InterruptedException {
+	 objutil.refresthpage(driver);
 	 purchasepage.addPurSearch("shampoo");
-	  Thread.sleep(2000);
-	  purchasepage.PurchaseSave.click();
-	  Thread.sleep(2000);
-	  String msg=purchasepage.PInvalidLocation.getText();
-	  System.out.println(msg);
-	  if(msg.contains("This field is required"))
-	  {
-		  Assert.assertTrue(true);
-	  }
-	  
-	  }
+	 objwait.waitSleep(2000);
+	 purchasepage.PurchaseSave.click();
+	 objwait.waitForElementTobeVisible(driver, purchasepage.PInvalidLocation,Duration.ofSeconds(4));
+	 String msg=purchasepage.PInvalidLocation.getText();
+	  Assert.assertEquals(msg, "This field is required.","Failed to execute withour businesslogic");
+  }
 
-@Test(enabled=true)
-public void TC_EaddingwithoutProduct() throws InterruptedException {
-	 driver.navigate().refresh();
-	 Thread.sleep(2000);
-	  purchasepage.PurchaseSave.click();
-	  Thread.sleep(2000);
+@Test(priority=5,enabled=true)
+public void TC_EVerifyaddingwithoutProduct() throws InterruptedException {
+	 objutil.refresthpage(driver);
+	 purchasepage.PurchaseSave.click();
+	 objwait.waitForElementTobeVisible(driver, purchasepage.PNoProduct,Duration.ofSeconds(2)); 
 	  String msg=purchasepage.PNoProduct.getText();
-	  System.out.println(msg);
-	 if(msg.contains("No Products added, add some products first"))
-	  {
-		  Assert.assertTrue(true);
-	  }
-	  
-	  }
+	  if(msg.contains("No Products added, add some products first"))
+	    Assert.assertTrue(true);
+	 }
 
-@Test(enabled=true)
-public void TC_Faddingwithoutamount() throws InterruptedException {
-	 driver.navigate().refresh();
-	  Thread.sleep(5000);
+@Test(priority=6,enabled=true)
+public void TC_FVerifyaddingwithoutamount() throws InterruptedException {
+	 objutil.refresthpage(driver);
 	 purchasepage.addPurSearch("shampoo");
-	  Thread.sleep(2000);
+	 objwait.waitSleep(2000);
 	  purchasepage.PurchaseSave.click();
-	  Thread.sleep(2000);
 	  String vaAmo=purchasepage.addAmount("");
-	  System.out.println(vaAmo);
-	  if(vaAmo.equals("0,00"))
-	  Assert.assertTrue(true);
-	  
-	  
-	  }
+	  Assert.assertEquals(vaAmo,"0,00","Did not enter valid amount");
+	 }
 
-@Test
-public void TC_GCardDetails() throws InterruptedException
+@Test(priority=7,enabled=true)
+public void TC_GVerifyCardDetails() throws InterruptedException
 {
 	boolean msg=purchasepage.cardSelect();
+	Assert.assertEquals(msg,true );
 }
 
-@Test
-public void TC_HdateCheck()
+@Test(priority=8,enabled=true)
+public void TC_HVerifydateCheck()
 {
 	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");  
     Date date = new Date();  
@@ -135,65 +111,44 @@ public void TC_HdateCheck()
     String[] d1f=d1.split(" ");
 	String dsupp=purchasepage.dateCheckM();
 	String[] d2f=dsupp.split(" ");
-		System.out.println(d1f[0] + " "+d2f[0]);
-	
-	if(d1f[0].equals(d2f[0]))
-	{
-		Assert.assertTrue(true);
-	}
-	
+	Assert.assertEquals(d1f[0],d2f[0],"Date doesn not match.Test failed");
 }
 
-
-@Test
-public void TC_Isearchproduct() throws InterruptedException
+@Test(priority=9,enabled=true)
+public void TC_IVerifysearchproduct() throws InterruptedException
 {
 	purchasepage.addPurSearch("shampoo");
-	Thread.sleep(2000);
+	objwait.waitForElementTobeVisible(driver, purchasepage.productSearch,Duration.ofSeconds(3000));
 	String value=purchasepage.productSearch.getText();
 	System.out.println(value);
 	if(value.contains("shampoo"))
-	{
-		Assert.assertTrue(true);
-	}
-	
+	Assert.assertTrue(true);
 	
 }
 
-@Test
-public void TC_JfileUpload() throws InterruptedException
+@Test(priority=10)
+public void TC_JVerifyfileUpload() throws InterruptedException
 {
-	String value=purchasepage.FileUploadPurchase("C:\\Users\\Sajida\\Desktop\\Selenium class notes\\class1and2.txt");
-	
-	if(value.contains("class1and2.txt"))
-	{
-		Assert.assertTrue(true);
-	}
-	
-	
+ 	String filepath=purchasepage.fileupload();
+	String value=purchasepage.FileUploadPurchase(filepath);
+	Assert.assertEquals(value, "class1and2.txt","File did not get uploaded");
 }
 
-@Test
-public void TC_Kaddproduct() throws InterruptedException
+@Test(priority=11,groups= {"Regression"})
+public void TC_KVerifyaddproduct() throws InterruptedException
 {
-	
 	String value=purchasepage.addprodPage();
+	Assert.assertEquals(value, "Add Purchase - Lloll","Add product page not displayed ");
 	
-	if (value.equalsIgnoreCase("Add Purchase - Lloll"))
-	{
-	Assert.assertTrue(true);	
-	}
 }
 
-
-
- @Test
- public void TC_ZvalidData() throws InterruptedException
+ @Test(priority=12,groups= {"smoke"})
+ public void TC_ZVerifyvalidData() throws InterruptedException
  {
   driver.navigate().refresh();
-  objwait.waitSleep(3000);
+  objwait.implicitwait(driver);
   purchasepage.addsupplier("jon");
-  objwait.waitSleep(2000);
+  objwait.waitForElemntTobeClickable(driver, purchasepage.PurchaseStatus,Duration.ofSeconds(2000));
   purchasepage.addPurStatus();
   objwait.waitSleep(2000);
   purchasepage.addPurLocation("demo");
@@ -202,31 +157,20 @@ public void TC_Kaddproduct() throws InterruptedException
   objwait.waitSleep(2000);
   purchasepage.addAmount("2000");
   purchasepage.PurchaseSave.click();
-  System.out.println(driver.getTitle());
   String msg=purchasepage.PurchaseSaveMsg.getText();
-  if(msg.equals("Purchase added successfully"))
-  {
-	  Assert.assertTrue(true);
-  }
-  
-  
+  Assert.assertEquals(msg,"Purchase added successfully","Product was not added successfully");
  }
   @BeforeTest
   public void beforeTest() {
-	  obj.launchBrowser(readconfig.getUrl(),readconfig.getBrowser());
-	  this.driver=obj.driver;
-	   LoginPage objlogin=new LoginPage(driver);
-	   objlogin.EnterUserName(readconfig.getUserName());
-	 		objlogin.Enterpwd(readconfig.getPwd());
-	 		objlogin.buttonClick();
-	 		driver.findElement(By.cssSelector("button.btn-default:nth-child(3)")).click();
-	 		purchasepage=new PurchasePage(this.driver);
-
-  }
-
+	  launchBrowser(readconfig.getUrl(),readconfig.getBrowser());
+	  this.driver=super.driver;
+	   }
   @AfterTest
-  public void afterTest() {
-	  driver.quit();
-  }
+	 public void afterTest() {
+	 closeBrowser(driver);
+	 }
+	
+
+  
 
 }

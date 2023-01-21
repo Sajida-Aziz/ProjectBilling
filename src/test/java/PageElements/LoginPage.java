@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import Utilities.GeneralUtilities;
+import Utilities.readConfig;
 
 public class LoginPage {
 	WebDriver driver;
-	
+	GeneralUtilities objutil=new GeneralUtilities();
+
 	public LoginPage(WebDriver driver)
 	{
 	this.driver=driver;
@@ -19,34 +22,27 @@ public class LoginPage {
 	@FindBy(id="password")
 	public WebElement pwd;
 	@FindBy(tagName="button")
-	public WebElement buttonclick;
+    public WebElement buttonclick;
+	@FindBy(tagName="strong")
+    public WebElement invalidmsg;
 	@FindBy(css="button.btn-default:nth-child(3)")
 	public WebElement endTour;
 	
 	public void EnterUserName(String uname)
 	{
-		UserName.sendKeys(uname);
+		objutil.sendText(UserName, uname);
 	}
 	public void Enterpwd(String paswd)
 	{
-		pwd.sendKeys(paswd);
+		objutil.sendText(pwd, paswd);
+		
 	}
 	
 	public String buttonClick()
 	{
-		buttonclick.click();
-		String titleexp=driver.getTitle();
+		objutil.clickOnElement(buttonclick);
+		String titleexp=objutil.getPageTitle(driver);
 		return titleexp;
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
+

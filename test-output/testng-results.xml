@@ -1,69 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="12" passed="12" failed="0" skipped="0">
+<testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-04T17:22:03 GST" name="Default suite" finished-at="2023-01-04T17:24:03 GST" duration-ms="120400">
+  <suite name="Default suite" duration-ms="56164" started-at="2023-01-21T10:55:13 GST" finished-at="2023-01-21T10:56:09 GST">
     <groups>
+      <group name="smoke">
+        <method signature="TC_ListProduct.TC_AVerifyTitle()[pri:1, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_AVerifyTitle" class="TestNGtest.TC_ListProduct"/>
+      </group> <!-- smoke -->
+      <group name=" smoke">
+        <method signature="TC_ListProduct.TC_AverifySearch()[pri:2, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_AverifySearch" class="TestNGtest.TC_ListProduct"/>
+      </group> <!--  smoke -->
     </groups>
-    <test started-at="2023-01-04T17:22:03 GST" name="Default test" finished-at="2023-01-04T17:24:03 GST" duration-ms="120400">
-      <class name="TestNGtest.TC_Purchase">
-        <test-method is-config="true" signature="beforeTest()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:03 GST" name="beforeTest" finished-at="2023-01-04T17:22:15 GST" duration-ms="11645" status="PASS">
+    <test name="Default test" duration-ms="56164" started-at="2023-01-21T10:55:13 GST" finished-at="2023-01-21T10:56:09 GST">
+      <class name="TestNGtest.TC_ListProduct">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="beforeTest" is-config="true" duration-ms="15662" started-at="2023-01-21T10:55:13 GST" finished-at="2023-01-21T10:55:29 GST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method signature="TC_AverifyTitle()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:15 GST" name="TC_AverifyTitle" finished-at="2023-01-04T17:22:20 GST" duration-ms="5360" status="PASS">
+        <test-method status="PASS" signature="TC_AVerifyTitle()[pri:1, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_AVerifyTitle" duration-ms="14665" started-at="2023-01-21T10:55:29 GST" finished-at="2023-01-21T10:55:43 GST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_AverifyTitle -->
-        <test-method signature="TC_Baddingwithoutsuplier()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:20 GST" name="TC_Baddingwithoutsuplier" finished-at="2023-01-04T17:22:33 GST" duration-ms="12435" status="PASS">
+        </test-method> <!-- TC_AVerifyTitle -->
+        <test-method status="PASS" signature="validateTestCases(org.testng.ITestResult)[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="validateTestCases" is-config="true" duration-ms="3" started-at="2023-01-21T10:55:44 GST" finished-at="2023-01-21T10:55:44 GST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_AVerifyTitle status=SUCCESS method=TC_ListProduct.TC_AVerifyTitle()[pri:1, instance:TestNGtest.TC_ListProduct@7e07db1f] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_Baddingwithoutsuplier -->
-        <test-method signature="TC_Caddingwithoutstatus()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:33 GST" name="TC_Caddingwithoutstatus" finished-at="2023-01-04T17:22:52 GST" duration-ms="19405" status="PASS">
+        </test-method> <!-- validateTestCases -->
+        <test-method status="PASS" signature="TC_AverifySearch()[pri:2, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_AverifySearch" duration-ms="13715" started-at="2023-01-21T10:55:44 GST" finished-at="2023-01-21T10:55:57 GST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_Caddingwithoutstatus -->
-        <test-method signature="TC_DaddingwithoutbusinessLoc()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:22:52 GST" name="TC_DaddingwithoutbusinessLoc" finished-at="2023-01-04T17:23:05 GST" duration-ms="13403" status="PASS">
+        </test-method> <!-- TC_AverifySearch -->
+        <test-method status="PASS" signature="validateTestCases(org.testng.ITestResult)[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="validateTestCases" is-config="true" duration-ms="1" started-at="2023-01-21T10:55:57 GST" finished-at="2023-01-21T10:55:57 GST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_AverifySearch status=SUCCESS method=TC_ListProduct.TC_AverifySearch()[pri:2, instance:TestNGtest.TC_ListProduct@7e07db1f] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_DaddingwithoutbusinessLoc -->
-        <test-method signature="TC_EaddingwithoutProduct()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:05 GST" name="TC_EaddingwithoutProduct" finished-at="2023-01-04T17:23:12 GST" duration-ms="6796" status="PASS">
+        </test-method> <!-- validateTestCases -->
+        <test-method status="PASS" signature="TC_Bverifycheckbox()[pri:3, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_Bverifycheckbox" duration-ms="207" started-at="2023-01-21T10:55:57 GST" finished-at="2023-01-21T10:55:58 GST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_EaddingwithoutProduct -->
-        <test-method signature="TC_Faddingwithoutamount()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:12 GST" name="TC_Faddingwithoutamount" finished-at="2023-01-04T17:23:26 GST" duration-ms="13508" status="PASS">
+        </test-method> <!-- TC_Bverifycheckbox -->
+        <test-method status="PASS" signature="validateTestCases(org.testng.ITestResult)[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="validateTestCases" is-config="true" duration-ms="1" started-at="2023-01-21T10:55:58 GST" finished-at="2023-01-21T10:55:58 GST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_Bverifycheckbox status=SUCCESS method=TC_ListProduct.TC_Bverifycheckbox()[pri:3, instance:TestNGtest.TC_ListProduct@7e07db1f] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_Faddingwithoutamount -->
-        <test-method signature="TC_GCardDetails()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:26 GST" name="TC_GCardDetails" finished-at="2023-01-04T17:23:28 GST" duration-ms="2257" status="PASS">
+        </test-method> <!-- validateTestCases -->
+        <test-method status="PASS" signature="TC_Cverifydeletefunctio()[pri:4, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_Cverifydeletefunctio" duration-ms="8635" started-at="2023-01-21T10:55:58 GST" finished-at="2023-01-21T10:56:06 GST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_GCardDetails -->
-        <test-method signature="TC_HdateCheck()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:28 GST" name="TC_HdateCheck" finished-at="2023-01-04T17:23:28 GST" duration-ms="35" status="PASS">
+        </test-method> <!-- TC_Cverifydeletefunctio -->
+        <test-method status="PASS" signature="validateTestCases(org.testng.ITestResult)[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="validateTestCases" is-config="true" duration-ms="1" started-at="2023-01-21T10:56:06 GST" finished-at="2023-01-21T10:56:06 GST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_Cverifydeletefunctio status=SUCCESS method=TC_ListProduct.TC_Cverifydeletefunctio()[pri:4, instance:TestNGtest.TC_ListProduct@7e07db1f] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_HdateCheck -->
-        <test-method signature="TC_Isearchproduct()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:28 GST" name="TC_Isearchproduct" finished-at="2023-01-04T17:23:34 GST" duration-ms="6285" status="PASS">
+        </test-method> <!-- validateTestCases -->
+        <test-method status="PASS" signature="TC_DverifydeleteWithNoElement()[pri:5, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="TC_DverifydeleteWithNoElement" duration-ms="2281" started-at="2023-01-21T10:56:06 GST" finished-at="2023-01-21T10:56:08 GST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_Isearchproduct -->
-        <test-method signature="TC_JfileUpload()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:34 GST" name="TC_JfileUpload" finished-at="2023-01-04T17:23:36 GST" duration-ms="2123" status="PASS">
+        </test-method> <!-- TC_DverifydeleteWithNoElement -->
+        <test-method status="PASS" signature="validateTestCases(org.testng.ITestResult)[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="validateTestCases" is-config="true" duration-ms="1" started-at="2023-01-21T10:56:08 GST" finished-at="2023-01-21T10:56:08 GST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=TC_DverifydeleteWithNoElement status=SUCCESS method=TC_ListProduct.TC_DverifydeleteWithNoElement()[pri:5, instance:TestNGtest.TC_ListProduct@7e07db1f] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_JfileUpload -->
-        <test-method signature="TC_Kaddproduct()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:36 GST" name="TC_Kaddproduct" finished-at="2023-01-04T17:23:40 GST" duration-ms="3217" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC_Kaddproduct -->
-        <test-method signature="TC_ZvalidData()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:23:40 GST" name="TC_ZvalidData" finished-at="2023-01-04T17:24:03 GST" duration-ms="23446" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC_ZvalidData -->
-        <test-method is-config="true" signature="afterTest()[pri:0, instance:TestNGtest.TC_Purchase@74589991]" started-at="2023-01-04T17:24:03 GST" name="afterTest" finished-at="2023-01-04T17:24:03 GST" duration-ms="253" status="PASS">
+        </test-method> <!-- validateTestCases -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:TestNGtest.TC_ListProduct@7e07db1f]" name="afterTest" is-config="true" duration-ms="765" started-at="2023-01-21T10:56:08 GST" finished-at="2023-01-21T10:56:09 GST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->
-      </class> <!-- TestNGtest.TC_Purchase -->
+      </class> <!-- TestNGtest.TC_ListProduct -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
